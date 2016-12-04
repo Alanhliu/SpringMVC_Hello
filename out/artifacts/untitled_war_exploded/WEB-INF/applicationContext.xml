@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:property-placeholder location="classpath:config/jdbc.properties"/>
+
+    <!-- 配置数据源 dbcp -->
+    <bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${mysql.jdbc.driverClass}" />
+        <property name="url" value="${mysql.jdbc.jdbcUrl}" />
+        <property name="username" value="${mysql.jdbc.user}" />
+        <property name="password" value="${mysql.jdbc.password}" />
+        <property name="maxActive" value="30"/>
+        <property name="maxIdle" value="5"/>
+    </bean>
+
+    <bean id="postgreDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${postgre.jdbc.driverClass}" />
+        <property name="url" value="${postgre.jdbc.jdbcUrl}" />
+        <property name="username" value="${postgre.jdbc.user}" />
+        <property name="password" value="${postgre.jdbc.password}" />
+        <property name="maxActive" value="30"/>
+        <property name="maxIdle" value="5"/>
+    </bean>
+
+    <!--DynamicDataSource-->
+    <bean class="com.siasun.multidatasource.DynamicDataSource" id="dataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry value-ref="postgreDataSource" key="postgreDataSource"/>
+                <entry value-ref="mysqlDataSource" key="mysqlDataSource"/>
+             </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="mysqlDataSource"></property>
+    </bean>
+
+    <!-- sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--<property name="configLocation" value="classpath:config/sqlMapConfig.xml" />-->
+    </bean>
+
+    <!-- mapper扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+        <property name="basePackage" value="com.siasun.dao"></property>
+    </bean>
+</beans>

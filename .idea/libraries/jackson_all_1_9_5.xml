@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="jackson-all-1.9.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jackson-all-1.9.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcaptcha-all-1.0-RC4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mybatis-3.0.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mybatis-spring.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.18-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/postgresql-9.4.1212.jre6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

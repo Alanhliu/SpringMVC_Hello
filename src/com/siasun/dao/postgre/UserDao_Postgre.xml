@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.siasun.dao.mysql.UserDao_Mysql">
+
+    <resultMap id="resultMap" type="com.siasun.entities.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+
+    <select id="findAllUsers" resultMap="resultMap">
+        select * from siasun_user;
+    </select>
+
+</mapper>

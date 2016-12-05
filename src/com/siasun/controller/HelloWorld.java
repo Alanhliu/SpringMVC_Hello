@@ -31,6 +31,7 @@ public class HelloWorld {
 
     private static final String SUCCESS = "success";
 
+    //test dynamic datasource
     @RequestMapping("/helloworld")
     public String hello() {
 
